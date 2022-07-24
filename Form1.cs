@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace ImageEditor
 {
@@ -30,6 +32,31 @@ namespace ImageEditor
         }
 
 
+        void saveImage()
+        {
+            if (opened)
+            {
+                SaveFileDialog sfd = new SaveFileDialog(); //create a new save file dialog object
+                sfd.Filter = "Images|*.png;*.bpm;*.jpg";
+                ImageFormat format = ImageFormat.Png; // you want to store it in by default format
+                if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    string ext = Path.GetExtension(sfd.FileName);
+                    switch (ext)
+                    {
+                        case ".jpg":
+                            format = ImageFormat.Jpeg;
+                            break;
+                        case ".bmp":
+                            format = ImageFormat.Bmp;
+                            break;
+                    }
+                    pictureBox1.Image.Save(sfd.FileName, format);
+                }
+            }
+        }
+
+
         Image file;
         Boolean opened = false; //to check whether image is open in picture box or not
 
@@ -41,6 +68,11 @@ namespace ImageEditor
         private void button9_Click(object sender, EventArgs e)
         {
             openImage();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            saveImage();
         }
     }
 }
