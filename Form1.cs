@@ -208,7 +208,135 @@ namespace ImageEditor
 
 
 
+        void fog()
+        {
 
+            if (!opened)
+            {
+                MessageBox.Show("Open an Image then apply changes");
+            }
+            else
+            {
+
+
+                Image img = pictureBox1.Image;                             // storing image into img variable of image type from picturebox1
+                Bitmap bmpInverted = new Bitmap(img.Width, img.Height);   /* creating a bitmap of the height of imported picture in picturebox which consists of the pixel data for a graphics image
+                                                                        and its attributes. A Bitmap is an object used to work with images defined by pixel data.*/
+
+                ImageAttributes ia = new ImageAttributes();                 //creating an object of imageattribute ia to change the attribute of images
+                ColorMatrix cmPicture = new ColorMatrix(new float[][]       // now creating the color matrix object to change the colors or apply  image filter on image
+                {
+                    new float[]{1+0.3f, 0, 0, 0, 0},
+            new float[]{0, 1+0.7f, 0, 0, 0},
+            new float[]{0, 0, 1+1.3f, 0, 0},
+            new float[]{0, 0, 0, 1, 0},
+            new float[]{0, 0, 0, 0, 1}
+                });
+                ia.SetColorMatrix(cmPicture);           //pass the color matrix to imageattribute object ia
+                Graphics g = Graphics.FromImage(bmpInverted);   /*create a new object of graphics named g, ; Create graphics object for alteration.
+                                                            Graphics newGraphics = Graphics.FromImage(imageFile); is the format of loading image into graphics for alteration*/
+
+                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
+
+
+                /*   g.drawimage(image, new rectangle(location of rectangle axix-x, location axis-y, width of rectangle, height of rectangle),
+               location of image in rectangle x-axis, location of image in rectangle y-axis, width of image, height of image,
+               format of graphics unit,provide the image attributes   */
+
+
+                g.Dispose();                            //Releases all resources used by this Graphics.
+                pictureBox1.Image = bmpInverted;
+
+
+
+            }
+        }
+
+
+        void Frozen()
+        {
+
+            if (!opened)
+            {
+                MessageBox.Show("Open an Image then apply changes");
+            }
+            else
+            {
+
+
+                Image img = pictureBox1.Image;                             // storing image into img variable of image type from picturebox1
+                Bitmap bmpInverted = new Bitmap(img.Width, img.Height);   /* creating a bitmap of the height of imported picture in picturebox which consists of the pixel data for a graphics image
+                                                                        and its attributes. A Bitmap is an object used to work with images defined by pixel data.*/
+
+                ImageAttributes ia = new ImageAttributes();                 //creating an object of imageattribute ia to change the attribute of images
+                ColorMatrix cmPicture = new ColorMatrix(new float[][]       // now creating the color matrix object to change the colors or apply  image filter on image
+                {
+                    new float[]{1+0.3f, 0, 0, 0, 0},
+            new float[]{0, 1+0f, 0, 0, 0},
+            new float[]{0, 0, 1+5f, 0, 0},
+            new float[]{0, 0, 0, 1, 0},
+            new float[]{0, 0, 0, 0, 1}
+                });
+                ia.SetColorMatrix(cmPicture);           //pass the color matrix to imageattribute object ia
+                Graphics g = Graphics.FromImage(bmpInverted);   /*create a new object of graphics named g, ; Create graphics object for alteration.
+                                                            Graphics newGraphics = Graphics.FromImage(imageFile); is the format of loading image into graphics for alteration*/
+
+                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
+
+
+                /*   g.drawimage(image, new rectangle(location of rectangle axix-x, location axis-y, width of rectangle, height of rectangle),
+               location of image in rectangle x-axis, location of image in rectangle y-axis, width of image, height of image,
+               format of graphics unit,provide the image attributes   */
+
+
+                g.Dispose();                            //Releases all resources used by this Graphics.
+                pictureBox1.Image = bmpInverted;
+
+            }
+
+        }
+
+
+
+        void redscale()
+        {
+            if (!opened)
+            {
+                MessageBox.Show("Open an Image then apply changes");
+            }
+            else
+            {
+
+                Image img = pictureBox1.Image;                             // storing image into img variable of image type from picturebox1
+                Bitmap bmpInverted = new Bitmap(img.Width, img.Height);   /* creating a bitmap of the height of imported picture in picturebox which consists of the pixel data for a graphics image
+                                                                        and its attributes. A Bitmap is an object used to work with images defined by pixel data.*/
+
+                ImageAttributes ia = new ImageAttributes();                 //creating an object of imageattribute ia to change the attribute of images
+                ColorMatrix cmPicture = new ColorMatrix(new float[][]       // now creating the color matrix object to change the colors or apply  image filter on image
+                {
+                    new float[]{.393f, .349f, .272f, 0, 0},
+            new float[]{.769f, .686f, .534f, 0, 0},
+            new float[]{.189f, .168f, .131f, 0, 0},
+            new float[]{0, 0, 0, 1, 0},
+            new float[]{0, 0, 0, 0, 1}
+                });
+                ia.SetColorMatrix(cmPicture);           //pass the color matrix to imageattribute object ia
+                Graphics g = Graphics.FromImage(bmpInverted);   /*create a new object of graphics named g, ; Create graphics object for alteration.
+                                                            Graphics newGraphics = Graphics.FromImage(imageFile); is the format of loading image into graphics for alteration*/
+
+                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
+
+
+                /*   g.drawimage(image, new rectangle(location of rectangle axix-x, location axis-y, width of rectangle, height of rectangle),
+               location of image in rectangle x-axis, location of image in rectangle y-axis, width of image, height of image,
+               format of graphics unit,provide the image attributes   */
+
+
+                g.Dispose();                            //Releases all resources used by this Graphics.
+                pictureBox1.Image = bmpInverted;
+
+            }
+        }
 
 
 
@@ -262,6 +390,9 @@ namespace ImageEditor
 
         private void button1_Click(object sender, EventArgs e)
         {
+            redbar.Value = 0;
+            greenbar.Value = 0;
+            bluebar.Value = 0;
             reload();
         }
 
@@ -293,6 +424,31 @@ namespace ImageEditor
         private void bluebar_ValueChanged(object sender, EventArgs e)
         {
             hue();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            redscale();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Frozen();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            fog();
         }
     }
 }
