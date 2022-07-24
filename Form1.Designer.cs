@@ -37,19 +37,19 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.redbar = new System.Windows.Forms.TrackBar();
+            this.greenbar = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
+            this.bluebar = new System.Windows.Forms.TrackBar();
             this.label3 = new System.Windows.Forms.Label();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.redbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.greenbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bluebar)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -90,6 +90,7 @@
             this.button3.TabIndex = 3;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -137,21 +138,24 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Red";
             // 
-            // trackBar1
+            // redbar
             // 
-            this.trackBar1.Location = new System.Drawing.Point(74, 443);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(540, 56);
-            this.trackBar1.TabIndex = 9;
+            this.redbar.Location = new System.Drawing.Point(74, 443);
+            this.redbar.Maximum = 100;
+            this.redbar.Name = "redbar";
+            this.redbar.Size = new System.Drawing.Size(540, 56);
+            this.redbar.TabIndex = 9;
+            this.redbar.Scroll += new System.EventHandler(this.redbar_Scroll);
+            this.redbar.ValueChanged += new System.EventHandler(this.redbar_ValueChanged_1);
             // 
-            // trackBar2
+            // greenbar
             // 
-            this.trackBar2.Location = new System.Drawing.Point(74, 474);
-            this.trackBar2.Maximum = 100;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(540, 56);
-            this.trackBar2.TabIndex = 11;
+            this.greenbar.Location = new System.Drawing.Point(74, 474);
+            this.greenbar.Maximum = 100;
+            this.greenbar.Name = "greenbar";
+            this.greenbar.Size = new System.Drawing.Size(540, 56);
+            this.greenbar.TabIndex = 11;
+            this.greenbar.ValueChanged += new System.EventHandler(this.greenbar_ValueChanged);
             // 
             // label2
             // 
@@ -163,13 +167,14 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Green";
             // 
-            // trackBar3
+            // bluebar
             // 
-            this.trackBar3.Location = new System.Drawing.Point(74, 503);
-            this.trackBar3.Maximum = 100;
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(540, 56);
-            this.trackBar3.TabIndex = 13;
+            this.bluebar.Location = new System.Drawing.Point(74, 503);
+            this.bluebar.Maximum = 100;
+            this.bluebar.Name = "bluebar";
+            this.bluebar.Size = new System.Drawing.Size(540, 56);
+            this.bluebar.TabIndex = 13;
+            this.bluebar.ValueChanged += new System.EventHandler(this.bluebar_ValueChanged);
             // 
             // label3
             // 
@@ -212,11 +217,11 @@
             this.ClientSize = new System.Drawing.Size(829, 553);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
-            this.Controls.Add(this.trackBar3);
+            this.Controls.Add(this.bluebar);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.trackBar2);
+            this.Controls.Add(this.greenbar);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.redbar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
@@ -229,9 +234,9 @@
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.redbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.greenbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bluebar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,10 +253,10 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.TrackBar redbar;
+        private System.Windows.Forms.TrackBar greenbar;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TrackBar trackBar3;
+        private System.Windows.Forms.TrackBar bluebar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;

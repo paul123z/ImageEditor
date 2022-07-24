@@ -103,6 +103,121 @@ namespace ImageEditor
 
 
 
+
+        void filter3()
+        {
+            if (!opened)
+            {
+                MessageBox.Show("Open an Image then apply changes");
+            }
+            else
+            {
+
+                Image img = pictureBox1.Image;                             // storing image into img variable of image type from picturebox1
+                Bitmap bmpInverted = new Bitmap(img.Width, img.Height);   /* creating a bitmap of the height of imported picture in picturebox which consists of the pixel data for a graphics image
+                                                                        and its attributes. A Bitmap is an object used to work with images defined by pixel data.*/
+
+                ImageAttributes ia = new ImageAttributes();                 //creating an object of imageattribute ia to change the attribute of images
+                ColorMatrix cmPicture = new ColorMatrix(new float[][]       // now creating the color matrix object to change the colors or apply  image filter on image
+                {
+                    new float[]{.393f+0.3f, .349f, .272f, 0, 0},
+            new float[]{.769f, .686f+0.2f, .534f, 0, 0},
+            new float[]{.189f, .168f, .131f+0.9f, 0, 0},
+            new float[]{0, 0, 0, 1, 0},
+            new float[]{0, 0, 0, 0, 1}
+                });
+                ia.SetColorMatrix(cmPicture);           //pass the color matrix to imageattribute object ia
+                Graphics g = Graphics.FromImage(bmpInverted);   /*create a new object of graphics named g, ; Create graphics object for alteration.
+                                                            Graphics newGraphics = Graphics.FromImage(imageFile); is the format of loading image into graphics for alteration*/
+
+                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
+
+
+                /*   g.drawimage(image, new rectangle(location of rectangle axix-x, location axis-y, width of rectangle, height of rectangle),
+               location of image in rectangle x-axis, location of image in rectangle y-axis, width of image, height of image,
+               format of graphics unit,provide the image attributes   */
+
+
+                g.Dispose();                            //Releases all resources used by this Graphics.
+                pictureBox1.Image = bmpInverted;
+
+            }
+        }
+
+
+
+
+        
+
+
+        void hue()
+        {
+            float changered = redbar.Value * 0.1f;
+            float changegreen = greenbar.Value * 0.1f;
+            float changeblue = bluebar.Value * 0.1f;
+
+            //redvalue.Text = changered.ToString();
+            //greenvalue.Text = changeblue.ToString();
+            //bluevalue.Text = changegreen.ToString();
+
+            reload();
+            if (!opened)
+            {
+            }
+            else
+            {
+
+
+
+                Image img = pictureBox1.Image;                             // storing image into img variable of image type from picturebox1
+                Bitmap bmpInverted = new Bitmap(img.Width, img.Height);   /* creating a bitmap of the height of imported picture in picturebox which consists of the pixel data for a graphics image
+                                                                        and its attributes. A Bitmap is an object used to work with images defined by pixel data.*/
+
+                ImageAttributes ia = new ImageAttributes();                 //creating an object of imageattribute ia to change the attribute of images
+                ColorMatrix cmPicture = new ColorMatrix(new float[][]       // now creating the color matrix object to change the colors or apply  image filter on image
+                {
+                    new float[]{1+changered, 0, 0, 0, 0},
+            new float[]{0, 1+changegreen, 0, 0, 0},
+            new float[]{0, 0, 1+changeblue, 0, 0},
+            new float[]{0, 0, 0, 1, 0},
+            new float[]{0, 0, 0, 0, 1}
+                });
+                ia.SetColorMatrix(cmPicture);           //pass the color matrix to imageattribute object ia
+                Graphics g = Graphics.FromImage(bmpInverted);   /*create a new object of graphics named g, ; Create graphics object for alteration.
+                                                            Graphics newGraphics = Graphics.FromImage(imageFile); is the format of loading image into graphics for alteration*/
+
+                g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, ia);
+
+
+                /*   g.drawimage(image, new rectangle(location of rectangle axix-x, location axis-y, width of rectangle, height of rectangle),
+               location of image in rectangle x-axis, location of image in rectangle y-axis, width of image, height of image,
+               format of graphics unit,provide the image attributes   */
+
+
+                g.Dispose();                            //Releases all resources used by this Graphics.
+                pictureBox1.Image = bmpInverted;
+
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         void reload()
         {
             if (!opened)
@@ -141,12 +256,43 @@ namespace ImageEditor
 
         private void button2_Click(object sender, EventArgs e)
         {
+            
             filter2();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             reload();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            filter3();
+        }
+
+        private void redbar_ValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void redbar_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void redbar_ValueChanged_1(object sender, EventArgs e)
+        {
+            hue();
+        }
+
+        private void greenbar_ValueChanged(object sender, EventArgs e)
+        {
+            hue();
+        }
+
+        private void bluebar_ValueChanged(object sender, EventArgs e)
+        {
+            hue();
         }
     }
 }
